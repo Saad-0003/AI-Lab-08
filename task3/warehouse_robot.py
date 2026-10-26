@@ -30,6 +30,7 @@ def get_f(path):
 def a_star(start, goal):
     frontier = [[start]]
     visited = []
+    explored = 0
 
     while len(frontier) > 0:
         frontier.sort(key=get_f)
@@ -40,14 +41,17 @@ def a_star(start, goal):
             continue
 
         visited.append(node)
+        explored = explored + 1
 
         if node == goal:
+            print("Total nodes explored:", explored)
             return path
 
         for neighbour in warehouse[node]:
             new_path = path + [neighbour]
             frontier.append(new_path)
 
+    print("Total nodes explored:", explored)
     return None
 
 answer = a_star("Receiving", "Packing Station")
